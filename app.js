@@ -1,5 +1,5 @@
 var opts	= require("opts"),
-    NApp	= require("./lib/napp");
+    NApp	= require(__dirname + "/lib/napp");
 
 // option setting
 opts.parse([{
