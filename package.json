@@ -1,0 +1,14 @@
+{
+	"name": "pj",
+	"version": "0.0.1",
+	"private": true,
+	"scripts": {
+		"start": "node app"
+	},
+	"dependencies": {
+		"config" : "0.4.16",
+		"nlogger" : "0.3.1",
+		"opts" : "1.2.2",
+		"async" : "0.1.22"
+	}
+}
