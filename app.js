@@ -1,7 +1,14 @@
+
+/**
+ * Module dependencies.
+ */
+
 var opts	= require("opts"),
     NApp	= require(__dirname + "/lib/napp");
 
-// option setting
+
+// CLI
+
 opts.parse([{
 	short		: "l",
 	long		: "list",
@@ -20,11 +27,16 @@ opts.parse([{
 	description	: "Uninstall a application",
 	value		: false,
 	required	: false
+},{
+	short		: "n",
+	long		: "new-project",
+	description	: "create new project",
+	value		: false,
+	required	: false
 }], [], true);
 
 var project_name = opts.args().shift() || null;
 
-// switching
 switch(true){			
 case opts.get("install") && !!project_name:
 	// app installing
@@ -39,6 +51,14 @@ case opts.get("uninstall") && !!project_name:
 	(new NApp(project_name)).uninstall(function (err, res){
 		if(err){ console.error("[error] %s", err); return 0; }
 		console.log("[ok] %s is uninstalled successfully.", project_name);
+	});
+
+	break;
+case opts.get("new-project") && !!project_name:
+	// new project
+	(new NApp(project_name)).create(function (err, res){
+		if(err){ console.error("[error] %s", err); return 0; }
+		console.log("[ok] %s is created successfully.", project_name);
 	});
 
 	break;
