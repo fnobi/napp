@@ -11,40 +11,38 @@ opts.parse([{
 },{
 	short		: "i",
 	long		: "install",
-	description	: "Install a application from project",
-	value		: true,
+	description	: "Install a project as application",
+	value		: false,
 	required	: false
 },{
 	short		: "u",
 	long		: "uninstall",
 	description	: "Uninstall a application",
-	value		: true,
+	value		: false,
 	required	: false
 }], [], true);
 
+var project_name = opts.args().shift() || null;
+
 // switching
 switch(true){			
-case !!opts.get("install"):
+case opts.get("install") && !!project_name:
 	// app installing
-	var project_name = opts.get("install");
-
 	(new NApp(project_name)).install(function (err, res){
-		if(err){ console.error(err); return 0; }
-		console.log("%s is installed successfully.", project_name);
+		if(err){ console.error("[error] %s", err); return 0; }
+		console.log("[ok] %s is installed successfully.", project_name);
 	});
 
 	break;
-case !!opts.get("uninstall"):
+case opts.get("uninstall") && !!project_name:
 	// app uninstalling
-	var project_name = opts.get("uninstall");
-
 	(new NApp(project_name)).uninstall(function (err, res){
-		if(err){ console.error(err); return 0; }
-		console.log("%s is uninstalled successfully.", project_name);
+		if(err){ console.error("[error] %s", err); return 0; }
+		console.log("[ok] %s is uninstalled successfully.", project_name);
 	});
 
 	break;
-case opts.get("list"):
+default:
 	// listing projects
 	NApp.names(function(err,projects){
 		if(err){ console.error(err); return 0; }
@@ -52,6 +50,4 @@ case opts.get("list"):
 		console.log(projects.join("\t"));
 	});
 	break;
-default:
-	require("opts").help();
 }
