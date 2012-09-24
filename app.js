@@ -3,41 +3,41 @@
  * Module dependencies.
  */
 
-var opts	= require("opts"),
-    NApp	= require(__dirname + "/lib/napp");
+var opts = require("opts"),
+    NApp = require(__dirname + "/lib/napp");
 
 
 // CLI
 
 opts.parse([{
-	short		: "l",
-	long		: "list",
-	description	: "Show project list",
-	value		: false,
-	required	: false
+	short : "l",
+	long : "list",
+	description : "Show project list",
+	value : false,
+	required : false
 },{
-	short		: "i",
-	long		: "install",
-	description	: "Install a project as application",
-	value		: false,
-	required	: false
+	short : "i",
+	long : "install",
+	description : "Install a project as application",
+	value : false,
+	required : false
 },{
-	short		: "u",
-	long		: "uninstall",
-	description	: "Uninstall a application",
-	value		: false,
-	required	: false
+	short : "u",
+	long : "uninstall",
+	description : "Uninstall a application",
+	value : false,
+	required : false
 },{
-	short		: "n",
-	long		: "new-project",
-	description	: "create new project",
-	value		: false,
-	required	: false
+	short : "n",
+	long : "new-project",
+	description : "create new project",
+	value : false,
+	required : false
 }], [], true);
 
 var project_name = opts.args().shift() || null;
 
-switch(true){			
+switch(true){
 case opts.get("install") && !!project_name:
 	// app installing
 	(new NApp(project_name)).install(function (err, res){
